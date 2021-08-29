@@ -1,19 +1,26 @@
 <template>
   <h1>{{ details.title }}</h1>
-  <img
-    v-if="details.poster_path !== null"
-    :src="
-      imagesConfig.base_url + imagesConfig.poster_size + details.poster_path
-    "
-    :alt="details.title"
-    style="width: 100px"
-  />
-  <div v-if="details.overview">
-    <h2>Overview</h2>
-    <p>{{ details.overview }}</p>
+  <p><router-link :to="moviesListLink">Back to list</router-link></p>
+  <div class="row details">
+    <div class="col-md-4 mb-4 details-poster">
+      <img
+        v-if="details.poster_path !== null"
+        :src="
+          imagesConfig.base_url + imagesConfig.poster_size + details.poster_path
+        "
+        :alt="details.title"
+      />
+    </div>
+    <div class="col-md-8">
+      <div v-if="details.overview">
+        <h2>Overview</h2>
+        <p>{{ details.overview }}</p>
+      </div>
+      <detail-credits :movieId="movieId"></detail-credits>
+      <detail-images :movieId="movieId"></detail-images>
+    </div>
   </div>
-  <detail-credits :movieId="movieId"></detail-credits>
-  <detail-images :movieId="movieId"></detail-images>
+  <p><router-link :to="moviesListLink">Back to list</router-link></p>
 </template>
 
 <script>
@@ -32,6 +39,11 @@ export default {
     imagesConfig() {
       return this.$store.getters.getImagesConf;
     },
+    moviesListLink() {
+      return {
+        name: "movies",
+      };
+    },
   },
   mounted() {
     this.$store.dispatch("getDetails", { movieId: this.movieId });
@@ -39,3 +51,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.details {
+  &-poster {
+    img {
+      width: 100%;
+    }
+  }
+}
+</style>

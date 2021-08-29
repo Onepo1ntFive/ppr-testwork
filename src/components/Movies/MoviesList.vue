@@ -1,15 +1,17 @@
 <template>
-  <h2>Movies List</h2>
-  <ul>
+  <h2>List</h2>
+  <div class="row">
     <movies-item
       v-for="movie in movies"
       :key="movie.id"
       :id="movie.id"
       :title="computedTitle(movie)"
       :release_date="computedDate(movie)"
+      :poster_path="movie.poster_path"
+      :overview="movie.overview"
     >
     </movies-item>
-  </ul>
+  </div>
 </template>
 
 <script>
@@ -34,11 +36,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-</style>
