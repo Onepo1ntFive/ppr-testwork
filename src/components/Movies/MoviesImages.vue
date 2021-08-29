@@ -1,8 +1,8 @@
 <template>
-  <div v-if="images.length">
+  <div v-if="images.length" class="mb-4">
     <h2>Images</h2>
-    <ul>
-      <li v-for="(image, index) in images" :key="index + image.file_path">
+    <carousel :settings="settings" :breakpoints="breakpoints">
+      <slide v-for="image in images" :key="image.file_path">
         <a
           :href="
             imagesConfig.base_url + imagesConfig.full_size + image.file_path
@@ -13,14 +13,44 @@
               imagesConfig.base_url + imagesConfig.poster_size + image.file_path
             "
             :alt="`${alt}-${image.file_path}`"
-        /></a>
-      </li>
-    </ul>
+          />
+        </a>
+      </slide>
+      <template #addons>
+        <navigation />
+      </template>
+    </carousel>
   </div>
 </template>
 
 <script>
+import "vue3-carousel/dist/carousel.css";
+import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 export default {
+  components: {
+    Carousel,
+    Slide,
+    Pagination,
+    Navigation,
+  },
+  data() {
+    return {
+      settings: {
+        itemsToShow: 1,
+        wrapAround: true,
+      },
+      breakpoints: {
+        700: {
+          itemsToShow: 3.5,
+          snapAlign: "center",
+        },
+        1024: {
+          itemsToShow: 5,
+          snapAlign: "start",
+        },
+      },
+    };
+  },
   props: ["movieId", "alt"],
   computed: {
     images() {
@@ -38,19 +68,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-flow: row wrap;
+.carousel {
+  margin-left: -0.5rem;
+  margin-right: -0.5em;
+  img {
+    max-width: 100%;
+  }
 
-  li {
-    width: 100px;
-
-    img {
-      max-width: 100%;
-    }
+  &__slide {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
 </style>

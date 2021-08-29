@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '/ppr-testwork/',
+  // publicPath: '/ppr-testwork/',
   chainWebpack: config => {
     config
       .plugin('html')

@@ -19,9 +19,9 @@
         <p>{{ details.overview }}</p>
       </div>
       <detail-credits :movieId="movieId"></detail-credits>
-      <detail-images :alt="details.title" :movieId="movieId"></detail-images>
     </div>
   </div>
+  <detail-images :alt="details.title" :movieId="movieId"></detail-images>
   <p><router-link :to="moviesListLink">Back to list</router-link></p>
 </template>
 
