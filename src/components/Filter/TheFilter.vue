@@ -22,7 +22,9 @@
         </option>
       </select>
     </div>
-    <div class="col-12 col-md-2 pt-4"><button class="btn btn-primary">Submit</button></div>
+    <div class="col-12 col-md-2 pt-4">
+      <button class="btn btn-primary">Submit</button>
+    </div>
   </form>
 </template>
 
@@ -30,13 +32,16 @@
 export default {
   data() {
     return {
-      allYears: [1999, 2020, 2021, 1988, 1952],
       allTypes: ["movie", "tv"],
       selectedYear: this.$store.getters.getFilterParams.year,
       selectedMovieType: this.$store.getters.getFilterParams.movieType,
     };
   },
-  computed: {},
+  computed: {
+    allYears() {
+       return this.$store.getters.getAllYears;
+    },
+  },
   methods: {
     setData() {
       this.$store.dispatch("setData", {
@@ -44,6 +49,10 @@ export default {
         type: this.selectedMovieType,
       });
     },
+  },
+  mounted() {
+    this.$store.dispatch("getAllYears");
+    console.log(this.allYears)
   },
 };
 </script>

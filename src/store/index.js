@@ -12,6 +12,7 @@ export default createStore({
     credits: [],
     images: [],
     config: {},
+    allYears: [],
   },
   mutations: {
     setData(state, payload) {
@@ -56,10 +57,17 @@ export default createStore({
           context.state.config.poster_size = response.data.images.poster_sizes[3];
         });
     },
-
     setData(context, payload) {
       context.commit('setData', payload)
       context.dispatch('getMovies');
+    },
+    getAllYears(context) {
+      const yearMin = 1900;
+      const yearMax = new Date().getFullYear();
+
+      for (let index = yearMax; index >= yearMin; index--) {
+        context.state.allYears.push(index);
+      }
     }
   },
   getters: {
@@ -80,7 +88,9 @@ export default createStore({
     },
     getFilterParams(state) {
       return { year: state.year, movieType: state.movieType }
-    }
-  },
-  modules: {}
+    },
+    getAllYears(state) {
+      return state.allYears;
+    },
+  }
 })
