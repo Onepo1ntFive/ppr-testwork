@@ -2,9 +2,11 @@
   <h1>{{ details.title }}</h1>
   <p><router-link :to="moviesListLink">Back to list</router-link></p>
   <div class="row details">
-    <div class="col-md-4 mb-4 details-poster">
+    <div
+      class="col-md-4 mb-4 details-poster"
+      v-if="details.poster_path !== null"
+    >
       <img
-        v-if="details.poster_path !== null"
         :src="
           imagesConfig.base_url + imagesConfig.poster_size + details.poster_path
         "
@@ -17,7 +19,7 @@
         <p>{{ details.overview }}</p>
       </div>
       <detail-credits :movieId="movieId"></detail-credits>
-      <detail-images :movieId="movieId"></detail-images>
+      <detail-images :alt="details.title" :movieId="movieId"></detail-images>
     </div>
   </div>
   <p><router-link :to="moviesListLink">Back to list</router-link></p>

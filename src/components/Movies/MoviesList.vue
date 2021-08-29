@@ -28,7 +28,8 @@ export default {
       return (data) => (data.name ? data.name : data.title);
     },
     computedDate() {
-      return (data) => (data.first_air_date ? data.first_air_date : data.release_date);
+      return (data) =>
+        data.first_air_date ? data.first_air_date : data.release_date;
     },
   },
   mounted() {
