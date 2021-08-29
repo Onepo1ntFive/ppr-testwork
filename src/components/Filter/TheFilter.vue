@@ -52,7 +52,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getAllYears");
-    console.log(this.allYears)
   },
 };
 </script>
