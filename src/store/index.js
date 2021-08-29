@@ -27,7 +27,7 @@ export default createStore({
   actions: {
     getMovies(context) {
       axios
-        .get(`/discover/${context.state.movieType}?api_key=${context.state.apiKey}&sort_by=popularity.desc&year=${context.state.year}&first_air_date_year=${context.state.year}`)
+        .get(`/discover/${context.state.movieType}?api_key=${context.state.apiKey}&sort_by=popularity.asc&year=${context.state.year}&first_air_date_year=${context.state.year}`)
         .then((response) => {
           context.state.movies = response.data.results.slice(0, 10);
         });
